@@ -4,17 +4,13 @@ const db = require('../models');
 
 // GET /pokemon - return a page with favorited Pokemon
 router.get('/', function(req, res) {
-  // TODO: Get all records from the DB and render to view
 
   // 1.1 Model Association, notice no " ' ' " around `pokemon`
   db.pokemon.findAll()
   .then( pokemons => {
-    res.render('/pokemon', )
+    res.render('pokemon/index', pokemons)
   })
-  .catch();
-
-
-  res.render('/pokemon')
+  .catch(error => console.log(`❌ Error`, error));
 });
 
 router.get('/:name', function(req, res) {
@@ -25,18 +21,13 @@ router.get('/:name', function(req, res) {
 
 // POST /pokemon - receive the name of a pokemon and add it to the database
 router.post('/', function(req, res) {
-  // Reference database
-
   db.pokemon.findOrCreate({
     where: {
       name: req.body.name
     }
-  }).then( pokemons => {
-    res.redirect('/')
+  }).then( digimon => {
+    res.redirect('/pokemon')
   });
-
-  // TODO: Get form data and add a new record to DB
-  // res.send(req.body);
 });
 
 module.exports = router;
