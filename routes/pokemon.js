@@ -27,14 +27,16 @@ router.get('/:name', function(req, res) {
 router.post('/', function(req, res) {
   // Reference database
 
-  db.pokemon.findOrCreate()
-  .then( pokemons => {
-    res.render('/pokemon', )
-  })
-  .catch();
+  db.pokemon.findOrCreate({
+    where: {
+      name: req.body.name
+    }
+  }).then( pokemons => {
+    res.redirect('/')
+  });
 
   // TODO: Get form data and add a new record to DB
-  res.send(req.body);
+  // res.send(req.body);
 });
 
 module.exports = router;
