@@ -7,11 +7,15 @@ router.get('/', function(req, res) {
 
   // 1.1 Model Association, notice no " ' ' " around `pokemon`
   db.pokemon.findAll()
-  .then( pokemons => {
-    res.render('pokemon/index', pokemons)
+  .then( favorites => {
+    console.log('🪀 🪀 🪀 GET /: ', favorites)
+    res.render('pokemon/index', {
+      pokemon: favorites
+    })
   })
   .catch(error => console.log(`❌ Error`, error));
 });
+
 
 router.get('/:name', function(req, res) {
   // TODO: Get all records from the DB and render to view
@@ -26,6 +30,7 @@ router.post('/', function(req, res) {
       name: req.body.name
     }
   }).then( digimon => {
+    console.log('💎 💎 💎 post /: ', digimon)
     res.redirect('/pokemon')
   });
 });

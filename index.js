@@ -16,7 +16,6 @@ app.get('/', function(req, res) {
   axios.get(pokemonUrl).then(apiResponse => {
     let pokemon = apiResponse.data.results;
 
-    console.log(`🎨 pokemon`, pokemon)
     res.render('index', { pokemon: pokemon.slice(0, 151) });
   })
 });
